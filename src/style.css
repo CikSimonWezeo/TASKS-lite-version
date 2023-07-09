@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scrollbar{
+    scrollbar-width: thin;
+    scrollbar-color: #000000 #ffffff;
+    scrollbar-width: thin;
+    scrollbar-color: #000000 #ffffff;
+    background-color: #f1f1f1;
+}
+.scrollbar:hover{
+    background-color: #555555;
+}
