@@ -120,36 +120,26 @@
                   </div>
                </header>
             </div>
-            <div class="overflow-x-scroll"> 
-               <div class="flex mb-5">
-                  <div class="w-1/5 bg-gray-900 p-2 rounded-md mr-2 mt-5 flex-shrink-0" v-for="col in cols" :key="col">
-                     <div>
-                        <h2 contenteditable="" class="text-left mx-1 cursor-pointer hover:bg-gray-700 rounded-md text-blue-500 text-lg font-bold">{{ col }}</h2>
+            <div class="mt-5">
+               <ul>
+                  <li @click="changeColorDone(task)" :style="{ backgroundColor: task.bgColor }" class="text-left bg-gray-800 my-1 p-3 rounded-lg border-b border-gray-700 hover:bg-gray-600 cursor-pointer w-full text-white" v-for="task in tasks" :key="task.id">
+                    <input type="checkbox" class="rounded-lg">
+                     {{ task.text }}
+                  </li>
+               </ul>
+               <div class=" text-left block my-1 p-3 rounded-lg border-b border-gray-900 hover:bg-gray-600 bg-gray-800 cursor-pointer w-full"> 
+                  <a class="text-blue-500 block" @click="showModal = true">Add a task</a>
+                  <div v-if="showModal" class="">
+                     <div class="text-center flex">
+                        <textarea class="bg-gray-800 text-white mx-5 p-2" v-model="newTask" name="task" id="task" cols="30" rows="1"></textarea>
+                        <div>
+                           <button class="text-center bg-blue-500 m-2 p-2 rounded-md" @click="addTask()">Add</button>
+                           <button class="text-center bg-blue-500 m-2 p-2 rounded-md" @click="showModal = false">Close</button>
+                        </div>   
                      </div>
-                     <ul>
-                        <li @click="changeColorDone(task)" :style="{ backgroundColor: task.bgColor }" class="text-left bg-gray-800 my-2 p-3 rounded-lg border-b border-gray-700 hover:bg-gray-700 cursor-pointer w-full text-white" v-for="task in tasks" :key="task.id">
-                           {{ task.text }}
-                        </li>
-                     </ul>
-                     <div class=" text-left block my-1 p-3 rounded-lg border-b border-gray-900 hover:bg-gray-700 cursor-pointer w-full"> 
-                        <a class="text-blue-500 block" @click="showModal = true">Add a task</a>
-                        <div v-if="showModal" class="">
-                           <div class="text-center flex">
-                              <textarea class="bg-gray-800 text-white mx-5 p-2" v-model="newTask" name="task" id="task" cols="30" rows="1"></textarea>
-                              <div>
-                                 <button class="text-center bg-blue-500 m-2 p-2 rounded-md" @click="addTask()">Add</button>
-                                 <button class="text-center bg-blue-500 m-2 p-2 rounded-md" @click="showModal = false">Close</button>
-                              </div>   
-                           </div>
-                        </div>
-                     </div>     
                   </div>
-               </div>
+               </div>     
             </div>   
-            <div class="fotn-bold flex my-5">
-               <input class="rounded-xl p-2 mr-2 hover:bg-gray-200" placeholder="name of new column" v-model="newColumnName">
-               <div @click="addNewCol()" class="bg-blue-500 rounded-xl hover:cursor-pointer hover:bg-blue-400 p-2 text-xl font-semibold">Add</div>
-            </div>    
          </div>
       </main>
    </body>
@@ -163,7 +153,6 @@ export default {
          newTask: "",
          tasks: [],
          bgColor: "gray-800",
-         cols: ["My Day", "Important", "Planned", "Assigned to me", "Tasks"],
          newColumnName: ""
       }
    },
@@ -176,13 +165,9 @@ export default {
          this.showModal = false
          this.newTask = ""
       },
-      changeColorDone(task) {
+      /* changeColorDone(task) {
          task.bgColor = "green";
-      },
-      addNewCol(){
-         this.cols.push(this.newColumnName);
-         this.newColumnName = "";
-      }
+      }, */
    },
 }
 </script>
