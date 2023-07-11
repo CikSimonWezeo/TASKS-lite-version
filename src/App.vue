@@ -127,7 +127,7 @@
                         <h2 contenteditable="" class="text-left mx-1 cursor-pointer hover:bg-gray-700 rounded-md text-blue-500 text-lg font-bold">{{ col }}</h2>
                      </div>
                      <ul>
-                        <li @click="changeColorDone()" :style="{backgroundColor: bgColor}" class="text-left bg-gray-800 my-2 p-3 rounded-lg border-b border-gray-700 hover:bg-gray-700 cursor-pointer w-full text-white" v-for="task in tasks" :key="task.id">
+                        <li @click="changeColorDone(task)" :style="{ backgroundColor: task.bgColor }" class="text-left bg-gray-800 my-2 p-3 rounded-lg border-b border-gray-700 hover:bg-gray-700 cursor-pointer w-full text-white" v-for="task in tasks" :key="task.id">
                            {{ task.text }}
                         </li>
                      </ul>
@@ -171,12 +171,13 @@ export default {
       addTask(){
          this.tasks.push({
             text: this.newTask,
+            bgColor: "gray-800"
          })
          this.showModal = false
          this.newTask = ""
       },
-      changeColorDone(){
-         this.bgColor = "green"
+      changeColorDone(task) {
+         task.bgColor = "green";
       },
       addNewCol(){
          this.cols.push(this.newColumnName);
